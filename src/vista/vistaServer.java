@@ -7,12 +7,14 @@ package vista;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
+import server.Conector;
 
 
 /**
@@ -20,14 +22,7 @@ import javax.swing.JTextArea;
  * @author angel
  */
 public class vistaServer extends javax.swing.JFrame {
-
-    ServerSocket server;
-    Socket socket = new Socket();
-    int puerto = 9669;
-    DataOutputStream salida;
-    BufferedReader entrada;
-    private boolean bandera = false;
-
+    Conector server = new Conector();
     /**
      * Creates new form vistaServer
      */
@@ -117,26 +112,16 @@ public class vistaServer extends javax.swing.JFrame {
 
     private void botonEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEncenderActionPerformed
         textArea.setText("Conexion establecida. Esperando cliente");
-        System.out.println("Conexion establecida. Esperando cliente");
-        try {
-            server = new ServerSocket(puerto);
-            socket = server.accept();
-            System.out.println("Cliente conectado");
-            textArea.setText("Cliente conectado");
-            entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String mensaje = entrada.readLine();
-            salida = new DataOutputStream(socket.getOutputStream());
-            salida.writeUTF("Mensaje Procesado");
-            textArea.setText("Mensaje del Cliente: " + mensaje);
-            System.out.println("Mensaje del Cliente: " + mensaje);
-            socket.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        server.start();
     }//GEN-LAST:event_botonEncenderActionPerformed
 
     private void botonApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonApagarActionPerformed
-        // TODO add your handling code here:
+        try {
+            server.getSocket().close();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(vistaServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonApagarActionPerformed
 
     /**

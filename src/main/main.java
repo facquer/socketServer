@@ -13,8 +13,19 @@ import vista.vistaServer;
  */
 public class main {
 
+    private static vistaServer ven;
+
     public static void main(String[] args) {
-        vistaServer ventana = new vistaServer();
-        ventana.setVisible(true);
+        ven = new vistaServer();
+        ven.setVisible(true);
     }
+
+    public static vistaServer getVen() {
+        return ven;
+    }
+
+    public static void setVen(vistaServer ven) {
+        main.ven = ven;
+    }
+
 }
