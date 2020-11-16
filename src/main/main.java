@@ -5,6 +5,9 @@
  */
 package main;
 
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import vista.vistaServer;
 
 /**
@@ -14,7 +17,9 @@ import vista.vistaServer;
 public class main {
 
     private static vistaServer ven;
-
+    public static List<Socket> listSockets = new ArrayList<>();
+    
+    
     public static void main(String[] args) {
         ven = new vistaServer();
         ven.setVisible(true);

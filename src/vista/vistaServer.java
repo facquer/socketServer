@@ -111,7 +111,7 @@ public class vistaServer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEncenderActionPerformed
-        textArea.setText("Conexion establecida. Esperando cliente");
+        textArea.append("Conexion establecida. Esperando cliente \n");
         server.start();
     }//GEN-LAST:event_botonEncenderActionPerformed
 
